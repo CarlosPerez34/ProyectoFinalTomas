@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragon Ball Z API</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.cdn fonts.com/css/al-valenciaga-personaluseonly" rel="stylesheet">
+                
+
+</head>
+<body>
+    <nav class="navbar navbar-light" style="background-color:rgb(178, 240, 255)">
+        <div class="container">
+            <a class="navbar-brand" href="indexx.html">Inicio</a>
+
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" style="color: black"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Unidad 1</a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="/database/carlos1.php">Mostrar datos</a><br>
+                            <a class="dropdown-item" href="/database/carlos2.php">Mostrar datos 2</a><br>
+                            <a class="dropdown-item" href="/database/carlos3.php">Meter datos</a><br>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" style="color: black;"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Unidad 2</a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="/database/carlos4.php">Mostrar datos</a><br>
+                            <a class="dropdown-item" href="/database/carlos5.php">Mostrar datos</a><br>
+                            <a class="dropdown-item" href="/database/pokedex.html">Pokedex</a><br>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" style="color: black;"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Unidad 3</a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="/database/carlos7.html">Peliculas </a><br>
+                            <a class="dropdown-item" href="/database/carlos8.html">Dragon Ball Z</a><br>
+                            <a class="dropdown-item" href="/database/carlos9.html">Rick And Morty</a><br>
+                        </div>
+                    </li>
+
+                    
+                </ul>
+            </div>
+            
+
+        </div>
+    </nav>
+
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        :root {
+            --primary-color: #bc4343;
+            --secondary-color: #df7737;
+            --terceary-color: #a10f0f;
+        }
+        body {
+            background-color: var(--primary-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+        }
+        header {
+            padding: 16px;
+            display: flex;
+            justify-content: flex-end;
+            background-color: var(--terceary-color);
+        }
+        .search {
+            background-color: rgba(231, 227, 222, 0.713);
+            border: 5px solid rgb(166, 57, 57);
+            border-radius: 50px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 15px;
+            padding: 10px 16px;
+            color: black;
+        }
+        .search::placeholder {
+            color: var(--terceary-color);
+        }
+        .search:focus {
+            outline: none;
+            background-color: white;
+        }
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .personaje {
+            width: 300px;
+            margin: 15px;
+            background-color: var(--secondary-color);
+            box-shadow: 0 5px 5px black;
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+        .personaje img {
+            width: 100%;
+        }
+        .personaje-info {
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            justify-content: space-between;
+            gap: 4px;
+            padding: 8px 15px 15px;
+            letter-spacing: 8px;
+        }
+        .personaje-info h3 {
+            margin-top: 0;
+        }
+        .personaje-info span {
+            background-color: var(--primary-color);
+            padding: 5px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .personaje-info span.blue {
+            color: blue;
+        }
+        .personaje-info span.orange {
+            color: orange;
+        }
+        .personaje-info span.red {
+            color: rgb(0, 0, 0);
+        }
+        .overview {
+            background-color: white;
+            padding: 32px;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            max-height: 100%;
+            transform: translateY(101%);
+            overflow-y: auto;
+            transition: transform 1s ease-in;
+        }
+        .personaje:hover .overview {
+            transform: translateY(0);
+        }
+    </style>
+
+
+    <header>
+        <img src="dragon.png" alt="logo" style="width: auto" height="50px">
+        <form id="form">
+            <input type="text" id="search" class="search" placeholder="Busca tu personaje">
+        </form>
+    </header>
+    <main id="main"></main>
+    
+    <script>
+         const API_URL = 'https://dragonball-api.com/api/characters';
+          const main = document.getElementById('main');
+           const form = document.getElementById('form');
+            const search = document.getElementById('search');
+        getPersonajes(API_URL)
+
+        async function getPersonajes(url){
+             const res = await fetch(url);
+              const data = await res.json();
+               showPersonajes(data.items || data);
+        }
+        function showPersonajes(personajes){
+            main.innerHTML = '';
+
+            personajes.forEach((personaje) => {
+                const {name, image, ki, maxKi, race, gender, description} = personaje;
+                const personajeElements = document.createElement('div');
+                personajeElements.classList.add('personaje');
+                personajeElements.innerHTML = `
+                <img src = "${image}" alt="${name}">
+                <div class="personaje-info">
+                    <h3>${name}</h3>
+                    <span class = "${getClassByRate(ki)}">
+                        ${ki}</span>
+                        </div>
+                        <div class = "overview">
+                            <h3>Descripcion</h3>
+                            ${description}
+                        </div>`
+                    main.appendChild(personajeElements);
+            });}
+            function getClassByRate(ki){
+                if(ki >= 8000){
+                    return 'blue';
+                }else if (ki >= 5000){
+                    return 'orange';
+                }else{
+                    return 'red';
+                }}
+                form.addEventListener('submit', (e) => {
+                 e.preventDefault()
+                  const searchTerm = search.value.toLowerCase();
+                    if(searchTerm && searchTerm !== ''){
+                        getPersonajes(API_URL + `?name=${searchTerm}`)
+                        search.value='';
+                    }
+                    else
+                    {window.location.reload();}
+
+                })
+    </script>
+
+</body>
+</html>

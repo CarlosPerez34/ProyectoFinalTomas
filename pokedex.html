@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Proyecto pokemon</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <link href="https://fonts.cdn fonts.com/css/al-valenciaga-personaluseonly" rel="stylesheet">
+              
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      background-image: url(pokemon.png);
+      background-repeat: no-repeat;
+      background-size: 1600px;
+      color: rgba(255, 255, 255, 0.616);
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+    
+    button {
+      width: 100px;
+      height: 100px;
+      background-color: transparent;
+      border: 2px solid black;
+      border-radius: 50%;
+      position: absolute;
+      top: 200px;
+      left: 300px;
+      
+    }
+    
+    .placeholder {
+      width: 200px;
+      height: 50px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 25px;
+      position: absolute;
+      top: 25px;
+      left: 0px;
+    }
+    
+    .pokeImg {
+      position: absolute;
+      top: 200px;
+      left: 300px;
+      bottom: 200px;
+    }
+    
+    .pokeData {
+      position: absolute;
+      left: 500px;
+      font-size: 20px;
+    }
+   
+   
+  </style>
+</head>
+
+<nav class="navbar navbar-light" style="background-color:rgb(178, 240, 255)">
+  <div class="container">
+      <a class="navbar-brand" href="indexx.html">Inicio</a>
+
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="nav navbar-nav">
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" style="color: black"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Unidad 1</a>
+
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <a class="dropdown-item" href="/database/carlos1.php">Mostrar datos</a><br>
+                      <a class="dropdown-item" href="/database/carlos2.php">Mostrar datos 2</a><br>
+                      <a class="dropdown-item" href="/database/carlos3.php">Meter datos</a><br>
+                  </div>
+              </li>
+
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" style="color: black;"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Unidad 2</a>
+
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <a class="dropdown-item" href="/database/carlos4.php">Mostrar datos</a><br>
+                      <a class="dropdown-item" href="/database/carlos5.php">Mostrar datos</a><br>
+                      <a class="dropdown-item" href="/database/pokedex.html">Pokedex</a><br>
+                  </div>
+              </li>
+
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" style="color: black;"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Unidad 3</a>
+
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <a class="dropdown-item" href="/database/carlos7.html">Peliculas </a><br>
+                      <a class="dropdown-item" href="/database/carlos8.html">Dragon Ball Z</a><br>
+                      <a class="dropdown-item" href="/database/carlos9.html">Rick And Morty</a><br>
+                  </div>
+              </li>
+
+              
+          </ul>
+      </div>
+      
+
+  </div>
+</nav>
+
+
+
+
+<body>
+  <input type="text" placeholder="pikachu" id="pokemonInput" class="placeholder">
+  <img src="poke2.png" alt="poke2" id="pokeImg" width="100px" class="pokeImg">
+  <button onclick="fetchPokemon()"></button>
+
+  <div id="pokeName" class="pokeData" style="top: 50px;">Nombre:</div>
+   <div id="pokeHE" class="pokeData" style="top: 90px;">Altura:</div>
+    <div id="pokeWE" class="pokeData" style="top: 130px;">Peso:</div>
+     <div id="pokeTY" class="pokeData" style="top: 170px;">Tipo:</div>
+      <div id="pokeIT" class="pokeData" style="top: 210px;">Habilidad:</div>
+       <div id="pokeMOV" class="pokeData" style="top: 250px;">Movimiento 1:</div>
+        <div id="pokeMOV2" class="pokeData" style="top: 290px;">Movimiento 2:</div>
+         <div id="pokeMOV3" class="pokeData" style="top: 330px;">Movimiento 3:</div>
+          <div id="pokeMOV4" class="pokeData" style="top: 370px;">Movimiento 4:</div>
+
+
+ 
+
+
+  <script>
+    const fetchPokemon = () => {
+      const pokeNameInput = document.getElementById("pokemonInput");
+       let pokeName = pokeNameInput.value.toLowerCase();
+        const url = `https://pokeapi.co/api/v2/pokemon/${pokeName}`;
+
+      fetch(url)
+        .then((res) => {
+          if (res.status != 200) {
+            console.log("Error: Pokémon no encontrado");
+            return;
+          } else {
+            return res.json();
+          }
+        })
+        .then((data) => {
+          if (!data) return;
+
+         document.getElementById("pokeImg").src = data.sprites.front_default;
+          document.getElementById("pokeName").innerHTML = `Nombre: ${data.name}`;
+             document.getElementById("pokeHE").innerHTML = `Altura: ${data.height}`;
+              document.getElementById("pokeWE").innerHTML = `Peso: ${data.weight}`;
+               document.getElementById("pokeTY").innerHTML = `Tipo: ${data.types[0].type.name}`;
+                 document.getElementById("pokeIT").innerHTML = `Habilidad: ${data.abilities[0].ability.name}`;
+
+           const moves = data.moves;
+            document.getElementById("pokeMOV").innerHTML = `Movimiento 1: ${moves[0]?.move.name || "N/A"}`;
+             document.getElementById("pokeMOV2").innerHTML = `Movimiento 2: ${moves[1]?.move.name || "N/A"}`;
+              document.getElementById("pokeMOV3").innerHTML = `Movimiento 3: ${moves[2]?.move.name || "N/A"}`;
+                document.getElementById("pokeMOV4").innerHTML = `Movimiento 4: ${moves[3]?.move.name || "N/A"}`;
+
+     const stats = data.stats.map(stat => stat.base_stat);
+     const ctx = document.getElementById("miCanvas").getContext("2d");
+
+     if (window.miCanva !== undefined) {
+          window.miCanva.destroy();
+     }
+
+          window.miCanva = new Chart(ctx, {
+            type: "bar",
+            data: {
+              labels: ["HP", "Ataque", "Defensa", "Esp. Atk", "Esp. Def", "Velocidad"],
+               datasets: [{
+                label: data.name,
+                data: stats,
+                backgroundColor: [
+                  'rgba(255, 99, 132, 0.5)',
+                  'rgba(54, 162, 235, 0.5)',
+                  'rgba(255, 206, 86, 0.5)',
+                  'rgba(75, 192, 192, 0.5)',
+                  'rgba(153, 102, 255, 0.5)',
+                  'rgba(255, 159, 64, 0.5)'
+                ],
+                borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+              }]
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              },
+              plugins: {
+                legend: {
+                  display: false
+                }
+              }
+            }
+          });
+        });
+    };
+  </script>
+</body>
+</html>
